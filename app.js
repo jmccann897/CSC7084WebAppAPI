@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv').config({path: './config.env'});
 const dashrouter = require('./routes/dashroutes');
-const userrouter = require('./routers/userroutes');
+const userrouter = require('./routes/userroutes');
 
 
 const app = express();
