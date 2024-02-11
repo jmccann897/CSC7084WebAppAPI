@@ -32,7 +32,6 @@ exports.getDash = (req, res) => {
 //route for getEdit
 exports.getEdit = (req, res) => {
   const { id } = req.params;
-  console.log(id);
 
   const selectSQL = `SELECT * FROM  snapshot 
   INNER JOIN snapshot_emotion 
