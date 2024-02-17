@@ -89,5 +89,34 @@ exports.postLogin = (req, res) => {
       }
     });
   };
+
+  exports.datavis = (req, res) =>{
+
+    const user_id = { id } = req.params.id;
+
+    const getDataSQL = `SELECT datetime, emotion_id, score FROM  snapshot 
+    INNER JOIN snapshot_emotion 
+    ON snapshot.snapshot_id = snapshot_emotion.snapshot_id 
+    INNER JOIN trigger_context 
+    ON snapshot.trigger_id = trigger_context.trigger_id
+    WHERE user_id = ${user_id}`;
+    
+    conn.query(getDataSQL, (err, rows) => {
+      if (err) {
+        res.status(500);
+        res.json({
+          status: "failure",
+          message: err,
+        });
+      } else {
+        res.status(200);
+        res.json({
+          status: "success",
+          message: `${rows.length} records retrieved`,
+          result: rows,
+        });
+      }
+    });
+    };
   
  
