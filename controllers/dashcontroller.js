@@ -159,7 +159,9 @@ exports.postDelete = (req, res) => {
 
 //route for postAddsnap
 exports.postAddsnap = (req, res) => {
-  const data = req.body;
+  console.log(req.body);
+
+  //const data = req.body;
   const {
     happiness,
     sadness,
@@ -169,10 +171,9 @@ exports.postAddsnap = (req, res) => {
     surprise,
     fear,
     context,
-  } = req.body;
+  } = req.body.formdata;
 
-  //const user_id = req.session.user_id;
-  const user_id = 2;
+  const user_id = req.body.userinfo.user_id;
   const icon_id = 2;
   const image_url = "img_via_api.url";
   const trigger_vals = [context, icon_id];
