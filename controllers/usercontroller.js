@@ -8,9 +8,9 @@ INNER JOIN snapshot_emotion
 ON snapshot.snapshot_id = snapshot_emotion.snapshot_id 
 INNER JOIN trigger_context 
 ON snapshot.trigger_id = trigger_context.trigger_id
-WHERE snapshot.user_id = ${user_id}`;
+WHERE snapshot.user_id = ?`;
 
-  conn.query(getDashSQL, (err, rows) => {
+  conn.query(getDashSQL, user_id, (err, rows) => {
     if (err) {
       res.status(500);
       res.json({
@@ -103,13 +103,12 @@ exports.postRegUser = (req, res) => {
   const vals = [first_name, last_name, email, hash];
 
   //set region_id to 1 = UK
-  //set user_id to 1 = user
+  //set user_id to 1 = user / 2 = admin
   //SQL to insert new user into db
   const newuserSQL = `INSERT INTO reg_user 
    (user_id, first_name, last_name, email, password, user_type_id, region_id)
    VALUES (NULL, ?, ?, ?, ?, 1, 1)`;
 
-  //need to adjust a user insertion not a check!
   conn.query(newuserSQL, vals, (err, rows) => {
     if (err) {
       res.status(500);
