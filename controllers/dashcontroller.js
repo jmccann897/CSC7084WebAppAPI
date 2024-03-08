@@ -170,7 +170,7 @@ exports.postAddsnap = (req, res) => {
     contempt,
     surprise,
     fear,
-    context,
+    context
   } = req.body.formdata;
 
   const user_id = req.body.userinfo.user_id;
